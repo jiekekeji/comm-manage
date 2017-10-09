@@ -32,7 +32,7 @@ module.exports = {
         //测试环境
         // target: 'http://192.168.1.200:8080',
         //正式环境
-        target: 'http://47.91.89.169',
+        target: 'http://25.26.36.22',
         changeOrigin: true,
         pathRewrite: {
           '^/api': ''
