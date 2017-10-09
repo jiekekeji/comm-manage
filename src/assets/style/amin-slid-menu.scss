@@ -1,0 +1,20 @@
+/*侧滑菜单的滑出、滑入动画*/
+@import "base.scss";
+
+@keyframes slidOut {
+  from {
+    left: -(pxToRem(1080, 1080));
+  }
+  to {
+    left: 0;
+  }
+}
+
+@keyframes slidIn {
+  from {
+    left: 0;
+  }
+  to {
+    left: -(pxToRem(1080, 1080));
+  }
+}
