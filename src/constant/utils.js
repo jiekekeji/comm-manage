@@ -1,14 +1,11 @@
 import md5 from 'js-md5'
 var utils = {
   // 设置页面标题
-  setDocumentTitle: function (title) {
-    'use strict'
+  setDocTitle: function (title) {
     setTimeout(function () {
       document.title = title
       var iframe = document.createElement('iframe')
-      // 打包时
-      iframe.src = '/manage/static/logo.png' // 必须
-      // iframe.src = '../../static/public/logo.png' // 必须
+      iframe.src = '/manage/static/logo.png'
       iframe.style.visibility = 'hidden'
       iframe.style.width = '1px'
       iframe.style.height = '1px'
@@ -21,11 +18,7 @@ var utils = {
     }, 0)
   },
 
-  /**
-   * 判断是否为空
-   * @param text
-   * @returns {boolean}
-   */
+  //判断对象为undefined或null或""
   isEmpty: function (text) {
     if (typeof (text) === 'undefined' || text === null || text === '') {
       return true
@@ -33,25 +26,17 @@ var utils = {
     return false
   },
 
-  /**
-   * 正则校验手机号
-   * @param phoneNum
-   * @returns {boolean}
-   */
-  isPhoneNum: function (phoneNum) {
+  //验证手机号的正确性
+  isPhoneNum: function (phone) {
     var reg = /(^0{0,1}1[3|4|5|6|7|8|9][0-9]{9}$)/
-    if (reg.test(phoneNum)) {
+    if (reg.test(phone)) {
       return true
     } else {
       return false
     }
   },
 
-  /**
-   * 验证是否为邮箱
-   * @param phoneNum
-   * @returns {boolean}
-   */
+  //验证邮箱的格式
   isEmail: function (email) {
     var reg = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
     if (reg.test(email)) {
@@ -61,78 +46,19 @@ var utils = {
     }
   },
 
-  /**
-   * 获取对应语言的值
-   * that :VueI18n对象
-   * key：对应的语言
-   * @returns {boolean}
-   */
-  getLMsg: function (that) {
-    let la = that._i18n.locale;
-    if (la === "zh") {
-      return that._i18n.messages.zh.message;
-    } else {
-      return that._i18n.messages.en.message;
-    }
-  },
-
-  /**
-   * 会话级别存对象
-   * @param key
-   * @param obj
-   */
+  //会话级别存对象
   saveSessionObj: function (key, obj) {
     var str = JSON.stringify(obj)
     sessionStorage.setItem(key, str)
   },
 
-  /**
-   * 会话级别取对象
-   * @param key
-   */
+  //会话级别取对象
   getSessionObj: function (key) {
     var str = sessionStorage.getItem(key)
     return JSON.parse(str)
   },
 
-
-  /**
-   * 保存登录的token信息
-   * @param token
-   */
-  saveToken: function (token) {
-    this.saveSessionObj('token', token)
-  },
-
-  /**
-   *获取保存的token
-   */
-  getToken: function () {
-    return this.getSessionObj('token')
-  },
-
-  /**
-   * 清楚token信息
-   */
-  clearToken: function () {
-    sessionStorage.removeItem('token')
-  },
-
-  /**
-   * 判断用户是否已登录
-   */
-  isUserLogin: function () {
-    let token = this.getToken()
-    if (this.isEmpty(token)) {
-      return false
-    }
-    return true
-  },
-
-  /**
-   * 生成一个 0 - 1000 之间的随机整数
-   * @returns {Number}
-   */
+  //生成一个 0 - 1000 之间的随机整数
   getRandom: function () {
     let s = []
     let hexDigits = '0123456789abcdef'
@@ -148,28 +74,14 @@ var utils = {
     return uuid + '-' + tm
   },
 
-  /**
-   * 获取随机键
-   * @param random
-   * @returns {*}
-   */
-  getRandomkey: function (random) {
-    let userid = this.getToken().userid
-    let userkey = this.getToken().userkey
-    return md5('' + userid + random + userkey + userid + random + userkey)
-  },
-
-
   //设置body元素的背景颜色
   setBodyBgColor: function (color) {
-    $("body").css("background-color", color);
+    var bodys = document.getElementsByTagName("body");
+    var body = bodys[0];
+    body.setAttribute("bgcolor", color);
   },
 
-  /**
-   * 保留两位小数
-   * @param x
-   * @returns {*}
-   */
+  //保留两位小数
   toDecimal2: function (x) {
     var f = parseFloat(x);
     if (isNaN(f)) {

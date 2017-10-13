@@ -13,8 +13,12 @@ Vue.use(ElementUI)
 
 import {api} from "./constant/api"
 import {utils} from "./constant/utils"
+import {constant} from "./constant/constant"
+import {pathno} from "./constant/pathno"
 Vue.prototype.$api = api;
 Vue.prototype.$utils = utils;
+Vue.prototype.$constant = constant;
+Vue.prototype.$pathno = pathno;
 
 /* eslint-disable no-new */
 new Vue({
